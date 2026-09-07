@@ -8,7 +8,7 @@ package Main;
  *
  * @author Familia
  */
-public class Main {
+public class Taller2GameZoneUnicesar {
 
     /**
      * @param args the command line arguments

@@ -9,6 +9,7 @@ package Main;
  * @author Usuario
  */
 public abstract class Product {
+
     private String id;
     private String title;
     private double price;
@@ -20,7 +21,8 @@ public abstract class Product {
         this.price = price;
         this.stockQuantity = stockQuantity;
     }
-        public abstract String getDescription();
+
+    public abstract String getDescription();
 
     public String getId() {
         return id;
@@ -37,6 +39,21 @@ public abstract class Product {
     public int getStockQuantity() {
         return stockQuantity;
     }
-        
-        
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
+    }
+
+    public void setStockQuantity(int stockQuantity) {
+        this.stockQuantity = stockQuantity;
+    }
+
 }

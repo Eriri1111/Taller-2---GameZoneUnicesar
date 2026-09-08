@@ -1,4 +1,4 @@
-package com.gamezone.service;
+package service;
 
 import com.gamezone.model.Client;
 import com.gamezone.model.Seller;

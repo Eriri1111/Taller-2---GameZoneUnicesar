@@ -1,4 +1,4 @@
-package com.gamezone.model;
+package model;
 
 /**
  * Abstract base class that represents any person interacting with the store.

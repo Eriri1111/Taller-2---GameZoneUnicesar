@@ -1,4 +1,4 @@
-package com.gamezone.model;
+package model;
 
 /**
  * Represents a single product line within a {@link Sale}: a snapshot of the

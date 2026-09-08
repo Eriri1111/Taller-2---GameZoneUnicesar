@@ -1,4 +1,4 @@
-package com.gamezone.ui;
+package ui;
 
 import com.gamezone.model.Client;
 import com.gamezone.model.Product;

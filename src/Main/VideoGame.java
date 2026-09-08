@@ -14,16 +14,18 @@ public class VideoGame extends Product {
     private String genre;
     private String ageRating;
 
-    public VideoGame(String id, String title, double price, int stockQuantity) {
+    public VideoGame(String id, String title, double price, int stockQuantity, String platform, String genre, String ageRating) {
         super(id, title, price, stockQuantity);
         this.platform = platform;
         this.genre = genre;
         this.ageRating = ageRating;
     }
 
+        
     @Override
     public String getDescription() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+       return String.format("VideoGame [ID: %s] %s | Platform: %s | Genre: %s | Rating: %s | Price: $%.2f | Stock: %d",
+                getId(), getTitle(), platform, genre, ageRating, getPrice(), getStockQuantity());
     }
 
     public String getPlatform() {

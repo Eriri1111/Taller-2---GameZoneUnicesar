@@ -133,7 +133,8 @@ public class ConsoleUI {
     private void listProducts() {
         System.out.println("--- Product inventory ---");
         List<Product> products = ProductService.listProducts();
-        if (products.isEmpty()) {
+        if (!products.isEmpty()) {
+        } else {
             System.out.println("No products registered yet.");
             return;
         }

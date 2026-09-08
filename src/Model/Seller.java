@@ -1,4 +1,4 @@
-package com.gamezone.model;
+package Model;
 
 /**
  * Represents a seller (employee) of GameZone Unicesar. In addition to the

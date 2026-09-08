@@ -1,8 +1,8 @@
 package service;
 
-import com.gamezone.model.Product;
-import com.gamezone.model.Sale;
-import com.gamezone.model.SaleItem;
+import model.Product;
+import model.Sale;
+import model.SaleItem;
 import Dao.SaleDAO;
 
 import java.time.LocalDate;

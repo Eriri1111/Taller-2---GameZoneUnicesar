@@ -1,8 +1,8 @@
 package Dao;
 
-import com.gamezone.model.Console;
-import com.gamezone.model.Product;
-import com.gamezone.model.Videogame;
+import model.Console;
+import model.Product;
+import model.Videogame;
 
 import java.io.BufferedReader;
 import java.io.FileReader;

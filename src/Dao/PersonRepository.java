@@ -1,7 +1,7 @@
 package Dao;
 
-import com.gamezone.model.Client;
-import com.gamezone.model.Seller;
+import model.Client;
+import model.Seller;
 
 import java.io.BufferedReader;
 import java.io.FileReader;

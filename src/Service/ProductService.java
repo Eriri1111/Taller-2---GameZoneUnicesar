@@ -14,27 +14,34 @@ import java.util.List;
  * @author Usuario
  */
 public class ProductService {
+
     private final ProductRepository repository;
-    private final List <Product> products;
-    
-    public ProductService (ProductRepository repository){
+    private final List<Product> products;
+
+    public ProductService(ProductRepository repository) {
         this.repository = repository;
         this.products = repository.loadProducts();
     }
-     public void registerProduct(Product product) {
+
+    public void registerProduct(Product product) {
         if (findProductById(product.getId()) != null) {
             throw new IllegalArgumentException("A product with ID " + product.getId() + " already exists.");
         }
         products.add(product);
         repository.saveProducts(products);
     }
-       public List<Product> getAllProducts() {
+
+    public List<Product> getAllProducts() {
         return new ArrayList<>(products);
     }
 
-    private Object findProductById(String id) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public Product findProductById(String id) {
+        for (Product product : products) {
+            if (product.getId().equalsIgnoreCase(id)) {
+                return product;
+            }
+        }
+        return null;
     }
-    
-    
+
 }

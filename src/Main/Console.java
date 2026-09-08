@@ -8,7 +8,8 @@ package Main;
  *
  * @author Usuario
  */
-public class Console extends Product{
+public class Console extends Product {
+
     private String brand;
     private String model;
     private String generation;
@@ -22,9 +23,9 @@ public class Console extends Product{
 
     @Override
     public String getDescription() {
-       return String.format("Console [ID: %s] %s | Brand: %s | Model: %s | Gen: %s | Price: $%.2f | Stock: %d",
+        return String.format("Console [ID: %s] %s | Brand: %s | Model: %s | Gen: %s | Price: $%.2f | Stock: %d",
                 getId(), getTitle(), brand, model, generation, getPrice(), getStockQuantity());
-    }  
+    }
 
     public String getBrand() {
         return brand;
@@ -37,5 +38,17 @@ public class Console extends Product{
     public String getGeneration() {
         return generation;
     }
-    
+
+    public void setBrand(String brand) {
+        this.brand = brand;
+    }
+
+    public void setModel(String model) {
+        this.model = model;
+    }
+
+    public void setGeneration(String generation) {
+        this.generation = generation;
+    }
+
 }

@@ -8,10 +8,10 @@ package Model;
  */
 public class SaleItem {
 
-    private String productId;
-    private String productTitle;
-    private double unitPrice;
-    private int quantity;
+    private final String productId;
+    private final String productTitle;
+    private final double unitPrice;
+    private final int quantity;
 
     /**
      * Creates a new sale item.

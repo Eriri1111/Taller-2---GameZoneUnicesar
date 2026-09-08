@@ -1,9 +1,9 @@
 package Service;
 
 import Model.Product;
-import com.gamezone.model.Sale;
-import com.gamezone.model.SaleItem;
-import com.gamezone.persistence.SaleDAO;
+import Model.Sale;
+import Model.SaleItem;
+import Dao.SaleDAO;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -76,7 +76,7 @@ public class SaleService {
             String productId = entry.getKey();
             int quantity = entry.getValue();
 
-            Optional<Product> product = productService.findById(productId);
+            Optional<Product> product = (Optional<Product>) productService.findById(productId);
             if (product.isEmpty()) {
                 throw new IllegalArgumentException("Product not found: " + productId);
             }

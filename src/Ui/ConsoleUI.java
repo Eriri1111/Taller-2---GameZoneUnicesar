@@ -22,7 +22,7 @@ import java.util.UUID;
  */
 public class ConsoleUI {
 
-    private final ProductService productService;
+    private final ProductService ProductService;
     private final PersonService personService;
     private final SaleService saleService;
     private final Scanner scanner;
@@ -35,7 +35,7 @@ public class ConsoleUI {
      * @param saleService    service used for sale operations
      */
     public ConsoleUI(ProductService productService, PersonService personService, SaleService saleService) {
-        this.productService = productService;
+        this.ProductService = productService;
         this.personService = personService;
         this.saleService = saleService;
         this.scanner = new Scanner(System.in);
@@ -106,7 +106,7 @@ public class ConsoleUI {
         String ageRating = scanner.nextLine();
 
         String id = generateId();
-        productService.registerVideogame(id, title, price, quantity, platform, genre, ageRating);
+        ProductService.registerVideogame(id, title, price, quantity, platform, genre, ageRating);
         System.out.println("Videogame registered with id: " + id);
     }
 
@@ -126,13 +126,13 @@ public class ConsoleUI {
         String generation = scanner.nextLine();
 
         String id = generateId();
-        productService.registerConsole(id, title, price, quantity, brand, model, generation);
+        ProductService.registerConsole(id, title, price, quantity, brand, model, generation);
         System.out.println("Console registered with id: " + id);
     }
 
     private void listProducts() {
         System.out.println("--- Product inventory ---");
-        List<Product> products = productService.listProducts();
+        List<Product> products = ProductService.listProducts();
         if (products.isEmpty()) {
             System.out.println("No products registered yet.");
             return;

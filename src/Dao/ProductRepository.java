@@ -5,7 +5,7 @@
 package Dao;
 
 import Model.Product;
-import Model.VideoGame;
+import Model.Videogame;
 import Model.Console;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -31,8 +31,8 @@ public class ProductRepository {
     public void saveProducts(List<Product> products) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath))) {
             for (Product p : products) {
-                if (p instanceof VideoGame) {
-                    VideoGame game = (VideoGame) p;
+                if (p instanceof Videogame) {
+                    Videogame game = (Videogame) p;
                     writer.write(String.format("GAME;%s;%s;%.2f;%d;%s;%s;%s%n",
                             game.getId(), game.getTitle(), game.getPrice(), game.getStockQuantity(),
                             game.getPlatform(), game.getGenre(), game.getAgeRating()));
@@ -75,7 +75,7 @@ public class ProductRepository {
                     String platform = data[5];
                     String genre = data[6];
                     String ageRating = data[7];
-                    products.add(new VideoGame(id, title, price, stock, platform, genre, ageRating));
+                    products.add(new Videogame(id, title, price, stock, platform, genre, ageRating));
                 } else if ("CONSOLE".equals(type)) {
 
                     String brand = data[5];

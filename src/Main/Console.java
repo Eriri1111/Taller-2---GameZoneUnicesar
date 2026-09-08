@@ -25,5 +25,17 @@ public class Console extends Product{
        return String.format("Console [ID: %s] %s | Brand: %s | Model: %s | Gen: %s | Price: $%.2f | Stock: %d",
                 getId(), getTitle(), brand, model, generation, getPrice(), getStockQuantity());
     }  
+
+    public String getBrand() {
+        return brand;
+    }
+
+    public String getModel() {
+        return model;
+    }
+
+    public String getGeneration() {
+        return generation;
+    }
     
 }

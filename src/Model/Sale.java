@@ -1,4 +1,4 @@
-package com.gamezone.model;
+package model;
 
 import java.time.LocalDate;
 import java.util.ArrayList;

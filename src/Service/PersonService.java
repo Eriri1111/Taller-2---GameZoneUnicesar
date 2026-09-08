@@ -1,7 +1,7 @@
 package service;
 
-import com.gamezone.model.Client;
-import com.gamezone.model.Seller;
+import model.Client;
+import model.Seller;
 import Dao.PersonDAO;
 
 import java.util.ArrayList;

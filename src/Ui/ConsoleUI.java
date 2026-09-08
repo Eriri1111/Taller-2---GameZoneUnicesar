@@ -1,13 +1,13 @@
 package ui;
 
-import com.gamezone.model.Client;
-import com.gamezone.model.Product;
-import com.gamezone.model.Sale;
-import com.gamezone.model.SaleItem;
-import com.gamezone.model.Seller;
-import com.gamezone.service.PersonService;
-import com.gamezone.service.ProductService;
-import com.gamezone.service.SaleService;
+import model.Client;
+import model.Product;
+import model.Sale;
+import model.SaleItem;
+import model.Seller;
+import service.PersonService;
+import service.ProductService;
+import service.SaleService;
 
 import java.util.HashMap;
 import java.util.List;

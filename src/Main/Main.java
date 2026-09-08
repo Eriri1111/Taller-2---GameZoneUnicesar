@@ -1,12 +1,12 @@
-package com.gamezone;
+package Main;
 
 import Dao.PersonRepository;
 import Dao.ProductRepository;
 import Dao.SaleRepository;
-import com.gamezone.service.PersonService;
-import com.gamezone.service.ProductService;
-import com.gamezone.service.SaleService;
-import com.gamezone.ui.ConsoleUI;
+import service.PersonService;
+import service.ProductService;
+import service.SaleService;
+import ui.ConsoleUI;
 
 /**
  * Entry point of the GameZone Unicesar application. Wires together the

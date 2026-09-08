@@ -25,10 +25,14 @@ public class PersonService {
      *
      * @param personDAO DAO used to persist clients and sellers
      */
-    public PersonService(PersonDAO personDAO) {
+    private PersonService(PersonDAO personDAO) {
         this.personDAO = personDAO;
         this.clients = new ArrayList<>(personDAO.loadClients());
         this.sellers = new ArrayList<>(personDAO.loadSellers());
+    }
+
+    public PersonService() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     /**

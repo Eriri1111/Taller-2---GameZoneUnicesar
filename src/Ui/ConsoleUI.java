@@ -271,4 +271,23 @@ public class ConsoleUI {
     private String generateId() {
         return UUID.randomUUID().toString().substring(0, 8);
     }
+
+    /**
+     * Main method so this UI can be executed directly.
+     *
+     * NOTE: This assumes ProductService, PersonService and SaleService
+     * have accessible no-argument constructors. If they require
+     * repositories or other dependencies, construct those first and pass
+     * them into the service constructors accordingly.
+     * @param args
+     */
+    public static void main(String[] args) {
+        // Replace these with the real constructors your project uses if needed.
+        ProductService productService = new ProductService();
+        PersonService personService = new PersonService();
+        SaleService saleService = new SaleService();
+
+        ConsoleUI ui = new ConsoleUI(productService, personService, saleService);
+        ui.start();
+    }
 }

@@ -24,6 +24,10 @@ public class ProductService {
         this.products = repository.loadProducts();
     }
 
+    public ProductService() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
     public void registerProduct(Product product) {
         if (findProductById(product.getId()) != null) {
             throw new IllegalArgumentException("A product with ID " + product.getId() + " already exists.");
@@ -71,6 +75,14 @@ public class ProductService {
     }
 
     public void registerVideogame(String id, String title, double price, int quantity, String platform, String genre, String ageRating) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    public void registerConsole(String id, String title, double price, int quantity, String brand, String model, String generation) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    public List<Product> listProducts() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
     

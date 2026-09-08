@@ -6,6 +6,7 @@ package Service;
 
 import Dao.ProductRepository;
 import Model.Product;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -19,6 +20,20 @@ public class ProductService {
     public ProductService (ProductRepository repository){
         this.repository = repository;
         this.products = repository.loadProducts();
+    }
+     public void registerProduct(Product product) {
+        if (findProductById(product.getId()) != null) {
+            throw new IllegalArgumentException("A product with ID " + product.getId() + " already exists.");
+        }
+        products.add(product);
+        repository.saveProducts(products);
+    }
+       public List<Product> getAllProducts() {
+        return new ArrayList<>(products);
+    }
+
+    private Object findProductById(String id) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
     
     

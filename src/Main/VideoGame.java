@@ -1,0 +1,29 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+package Main;
+
+/**
+ *
+ * @author Usuario
+ */
+public class VideoGame extends Product {
+    private String platform;
+    private String genre;
+    private String ageRating;
+
+    public VideoGame(String id, String title, double price, int stockQuantity) {
+        super(id, title, price, stockQuantity);
+        this.platform = platform;
+        this.genre = genre;
+        this.ageRating = ageRating;
+    }
+
+    @Override
+    public String getDescription() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+    
+    
+}

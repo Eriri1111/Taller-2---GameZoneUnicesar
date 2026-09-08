@@ -4,9 +4,9 @@
  */
 package Main.Dao;
 
-import Main.Product;
-import Main.VideoGame;
-import Main.Console;
+import Model.Product;
+import Model.VideoGame;
+import Model.Console;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -27,8 +27,7 @@ public class ProductRepository {
     public ProductRepository(String filePath) {
         this.filePath = filePath;
     }
-    
-    
+
     public void saveProducts(List<Product> products) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath))) {
             for (Product p : products) {
@@ -39,9 +38,9 @@ public class ProductRepository {
                             game.getPlatform(), game.getGenre(), game.getAgeRating()));
                 } else if (p instanceof Console) {
                     Console console = (Console) p;
-                    writer.write(String.format("CONSOLE;%s;%s;%.2f;%d;%s;%s;%s%n", console.getId(), 
-                            console.getTitle(),console.getPrice(), console.getStockQuantity(),
-                            console.getBrand(),console.getModel(),console.getGeneration()
+                    writer.write(String.format("CONSOLE;%s;%s;%.2f;%d;%s;%s;%s%n", console.getId(),
+                            console.getTitle(), console.getPrice(), console.getStockQuantity(),
+                            console.getBrand(), console.getModel(), console.getGeneration()
                     ));
                 }
             }
@@ -49,8 +48,8 @@ public class ProductRepository {
             System.err.println("Error saving products to file: " + e.getMessage());
         }
     }
-    
-      public List<Product> loadProducts() {
+
+    public List<Product> loadProducts() {
         List<Product> products = new ArrayList<>();
         File file = new File(filePath);
 
@@ -62,7 +61,9 @@ public class ProductRepository {
             String line;
             while ((line = reader.readLine()) != null) {
                 String[] data = line.split(";");
-                if (data.length < 8) continue;
+                if (data.length < 8) {
+                    continue;
+                }
 
                 String type = data[0];
                 String id = data[1];
@@ -82,7 +83,7 @@ public class ProductRepository {
                     String generation = data[7];
 
                     products.add(
-                        new Console(id, title,price, stock, brand,  model,generation));
+                            new Console(id, title, price, stock, brand, model, generation));
                 }
             }
         } catch (IOException | NumberFormatException e) {
@@ -90,6 +91,6 @@ public class ProductRepository {
         }
 
         return products;
-    }     
-    
+    }
+
 }

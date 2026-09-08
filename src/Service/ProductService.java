@@ -44,4 +44,17 @@ public class ProductService {
         return null;
     }
 
+    public void updateStock(String id, int quantity) {
+        Product product = findProductById(id);
+        if (product == null) {
+            throw new IllegalArgumentException("Product not found with ID: " + id);
+        }
+        if (product.getStockQuantity() < quantity) {
+            throw new IllegalArgumentException("Insufficient stock for product: " + product.getTitle());
+        }
+
+        product.setStockQuantity(product.getStockQuantity() - quantity);
+        repository.saveProducts(products);
+    }
+
 }

@@ -1,7 +1,7 @@
-package Service;
+package com.gamezone.service;
 
-import Model.Client;
-import Model.Seller;
+import com.gamezone.model.Client;
+import com.gamezone.model.Seller;
 import Dao.PersonDAO;
 
 import java.util.ArrayList;
@@ -25,14 +25,10 @@ public class PersonService {
      *
      * @param personDAO DAO used to persist clients and sellers
      */
-    private PersonService(PersonDAO personDAO) {
+    public PersonService(PersonDAO personDAO) {
         this.personDAO = personDAO;
         this.clients = new ArrayList<>(personDAO.loadClients());
         this.sellers = new ArrayList<>(personDAO.loadSellers());
-    }
-
-    public PersonService() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     /**

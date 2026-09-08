@@ -1,4 +1,4 @@
-package Model;
+package com.gamezone.model;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -14,11 +14,11 @@ import java.util.List;
  */
 public class Sale {
 
-    private final String id;
-    private final LocalDate date;
-    private final String clientId;
-    private final String sellerId;
-    private final List<SaleItem> items;
+    private String id;
+    private LocalDate date;
+    private String clientId;
+    private String sellerId;
+    private List<SaleItem> items;
 
     /**
      * Creates a new sale with no items. Items must be added afterwards

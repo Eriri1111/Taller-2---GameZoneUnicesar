@@ -1,6 +1,6 @@
 package Dao;
 
-import Model.Client;
+import com.gamezone.model.Client;
 
 import java.util.List;
 

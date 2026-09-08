@@ -1,6 +1,6 @@
 package Dao;
 
-import Model.Seller;
+import com.gamezone.model.Seller;
 
 import java.util.List;
 

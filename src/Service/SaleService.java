@@ -1,8 +1,8 @@
-package Service;
+package com.gamezone.service;
 
-import Model.Product;
-import Model.Sale;
-import Model.SaleItem;
+import com.gamezone.model.Product;
+import com.gamezone.model.Sale;
+import com.gamezone.model.SaleItem;
 import Dao.SaleDAO;
 
 import java.time.LocalDate;
@@ -34,15 +34,12 @@ public class SaleService {
      * @param personService  service used to validate people and update
      *                        purchase history
      */
-    public SaleService(SaleDAO saleDAO, ProductService productService, PersonService personService) {
+    public SaleService(SaleDAO saleDAO, ProductService productService,
+                        PersonService personService) {
         this.saleDAO = saleDAO;
         this.productService = productService;
         this.personService = personService;
         this.sales = new ArrayList<>(saleDAO.loadAll());
-    }
-
-    public SaleService() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     /**
@@ -79,7 +76,7 @@ public class SaleService {
             String productId = entry.getKey();
             int quantity = entry.getValue();
 
-            Optional<Product> product = (Optional<Product>) productService.findById(productId);
+            Optional<Product> product = productService.findById(productId);
             if (product.isEmpty()) {
                 throw new IllegalArgumentException("Product not found: " + productId);
             }

@@ -1,13 +1,14 @@
-package Ui;
+package com.gamezone.ui;
 
-import Model.Client;
-import Model.Product;
-import Model.Sale;
-import Model.SaleItem;
-import Model.Seller;
-import Service.PersonService;
-import Service.ProductService;
-import Service.SaleService;
+import com.gamezone.model.Client;
+import com.gamezone.model.Product;
+import com.gamezone.model.Sale;
+import com.gamezone.model.SaleItem;
+import com.gamezone.model.Seller;
+import com.gamezone.service.PersonService;
+import com.gamezone.service.ProductService;
+import com.gamezone.service.SaleService;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -22,7 +23,7 @@ import java.util.UUID;
  */
 public class ConsoleUI {
 
-    private final ProductService ProductService;
+    private final ProductService productService;
     private final PersonService personService;
     private final SaleService saleService;
     private final Scanner scanner;
@@ -35,7 +36,7 @@ public class ConsoleUI {
      * @param saleService    service used for sale operations
      */
     public ConsoleUI(ProductService productService, PersonService personService, SaleService saleService) {
-        this.ProductService = productService;
+        this.productService = productService;
         this.personService = personService;
         this.saleService = saleService;
         this.scanner = new Scanner(System.in);
@@ -106,7 +107,7 @@ public class ConsoleUI {
         String ageRating = scanner.nextLine();
 
         String id = generateId();
-        ProductService.registerVideogame(id, title, price, quantity, platform, genre, ageRating);
+        productService.registerVideogame(id, title, price, quantity, platform, genre, ageRating);
         System.out.println("Videogame registered with id: " + id);
     }
 
@@ -126,15 +127,14 @@ public class ConsoleUI {
         String generation = scanner.nextLine();
 
         String id = generateId();
-        ProductService.registerConsole(id, title, price, quantity, brand, model, generation);
+        productService.registerConsole(id, title, price, quantity, brand, model, generation);
         System.out.println("Console registered with id: " + id);
     }
 
     private void listProducts() {
         System.out.println("--- Product inventory ---");
-        List<Product> products = ProductService.listProducts();
-        if (!products.isEmpty()) {
-        } else {
+        List<Product> products = productService.listProducts();
+        if (products.isEmpty()) {
             System.out.println("No products registered yet.");
             return;
         }
@@ -270,24 +270,5 @@ public class ConsoleUI {
 
     private String generateId() {
         return UUID.randomUUID().toString().substring(0, 8);
-    }
-
-    /**
-     * Main method so this UI can be executed directly.
-     *
-     * NOTE: This assumes ProductService, PersonService and SaleService
-     * have accessible no-argument constructors. If they require
-     * repositories or other dependencies, construct those first and pass
-     * them into the service constructors accordingly.
-     * @param args
-     */
-    public static void main(String[] args) {
-        // Replace these with the real constructors your project uses if needed.
-        ProductService productService = new ProductService();
-        PersonService personService = new PersonService();
-        SaleService saleService = new SaleService();
-
-        ConsoleUI ui = new ConsoleUI(productService, personService, saleService);
-        ui.start();
     }
 }

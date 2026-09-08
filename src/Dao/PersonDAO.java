@@ -1,8 +1,5 @@
 package Dao;
 
-import Model.Seller;
-import java.util.List;
-
 /**
  * Data Access Object contract for the people module. Combines
  * {@link ClientDAO} and {@link SellerDAO}, since both clients and sellers
@@ -10,6 +7,4 @@ import java.util.List;
  * exposing each responsibility through its own focused interface.
  */
 public interface PersonDAO extends ClientDAO, SellerDAO {
-
-    public void saveSellers(List<Seller> sellers);
 }

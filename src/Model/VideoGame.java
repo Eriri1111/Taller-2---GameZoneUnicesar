@@ -1,6 +1,4 @@
-package Model;
-
-import Model.Product;
+package com.gamezone.model;
 
 /**
  * Represents a videogame sold by the store. In addition to the common

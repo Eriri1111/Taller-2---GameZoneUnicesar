@@ -1,6 +1,6 @@
 package Dao;
 
-import Model.Sale;
+import com.gamezone.model.Sale;
 
 /**
  * Data Access Object contract for {@link Sale} persistence. Declares the

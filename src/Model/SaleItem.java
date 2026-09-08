@@ -1,4 +1,4 @@
-package Model;
+package com.gamezone.model;
 
 /**
  * Represents a single product line within a {@link Sale}: a snapshot of the
@@ -8,10 +8,10 @@ package Model;
  */
 public class SaleItem {
 
-    private final String productId;
-    private final String productTitle;
-    private final double unitPrice;
-    private final int quantity;
+    private String productId;
+    private String productTitle;
+    private double unitPrice;
+    private int quantity;
 
     /**
      * Creates a new sale item.

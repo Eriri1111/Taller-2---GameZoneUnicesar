@@ -1,4 +1,4 @@
-package Model;
+package com.gamezone.model;
 
 /**
  * Abstract base class that represents any product sold by the store.
@@ -80,12 +80,4 @@ public abstract class Product {
      * @return a full description of the product
      */
     public abstract String getDescription();
-
-    public int getStockQuantity() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    public void setStockQuantity(int i) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
 }

@@ -1,4 +1,4 @@
-package Model;
+package com.gamezone.model;
 
 import java.util.ArrayList;
 import java.util.List;

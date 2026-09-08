@@ -1,4 +1,4 @@
-package Model;
+package com.gamezone.model;
 
 /**
  * Represents a gaming console sold by the store. In addition to the common

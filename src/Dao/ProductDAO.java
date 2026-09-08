@@ -1,6 +1,6 @@
 package Dao;
 
-import Model.Product;
+import com.gamezone.model.Product;
 
 /**
  * Data Access Object contract for {@link Product} persistence. Declares the

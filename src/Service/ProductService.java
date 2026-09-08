@@ -1,90 +1,128 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
-package Service;
+package com.gamezone.service;
 
-import Dao.ProductRepository;
-import Model.Product;
+import com.gamezone.model.Console;
+import com.gamezone.model.Product;
+import com.gamezone.model.Videogame;
+import Dao.ProductDAO;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 /**
- *
- * @author Usuario
+ * Contains the business rules related to products: registration, listing,
+ * lookup and stock management. This is the only layer authorized to invoke
+ * {@link ProductDAO}; the user interface never accesses persistence
+ * directly. The service depends on the DAO interface rather than on any
+ * concrete, file-based implementation.
  */
 public class ProductService {
 
-    private final ProductRepository repository;
+    private final ProductDAO productDAO;
     private final List<Product> products;
 
-    public ProductService(ProductRepository repository) {
-        this.repository = repository;
-        this.products = repository.loadProducts();
+    /**
+     * Creates the service and loads the current product data from disk.
+     *
+     * @param productDAO DAO used to persist products
+     */
+    public ProductService(ProductDAO productDAO) {
+        this.productDAO = productDAO;
+        this.products = new ArrayList<>(productDAO.loadAll());
     }
 
-    public ProductService() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    /**
+     * Registers a new videogame in the inventory and persists the change.
+     *
+     * @param id        unique identifier of the product
+     * @param title     title of the videogame
+     * @param price     unit price
+     * @param quantity  initial available quantity
+     * @param platform  platform the game was developed for
+     * @param genre     genre of the videogame
+     * @param ageRating recommended age rating
+     * @return the newly created videogame
+     */
+    public Videogame registerVideogame(String id, String title, double price, int quantity,
+                                        String platform, String genre, String ageRating) {
+        Videogame videogame = new Videogame(id, title, price, quantity, platform, genre, ageRating);
+        products.add(videogame);
+        persist();
+        return videogame;
     }
 
-    public void registerProduct(Product product) {
-        if (findProductById(product.getId()) != null) {
-            throw new IllegalArgumentException("A product with ID " + product.getId() + " already exists.");
-        }
-        products.add(product);
-        repository.saveProducts(products);
+    /**
+     * Registers a new console in the inventory and persists the change.
+     *
+     * @param id         unique identifier of the product
+     * @param title      commercial name of the console
+     * @param price      unit price
+     * @param quantity   initial available quantity
+     * @param brand      manufacturer brand
+     * @param model      specific model
+     * @param generation hardware generation
+     * @return the newly created console
+     */
+    public Console registerConsole(String id, String title, double price, int quantity,
+                                    String brand, String model, String generation) {
+        Console console = new Console(id, title, price, quantity, brand, model, generation);
+        products.add(console);
+        persist();
+        return console;
     }
 
-    public List<Product> getAllProducts() {
+    /**
+     * Returns every product currently available in the inventory.
+     *
+     * @return an unmodifiable-safe list of all products
+     */
+    public List<Product> listProducts() {
         return new ArrayList<>(products);
     }
 
-    public Product findProductById(String id) {
-        for (Product product : products) {
-            if (product.getId().equalsIgnoreCase(id)) {
-                return product;
-            }
-        }
-        return null;
+    /**
+     * Finds a product by its identifier.
+     *
+     * @param productId identifier of the product to search for
+     * @return an {@link Optional} containing the product if found
+     */
+    public Optional<Product> findById(String productId) {
+        return products.stream().filter(p -> p.getId().equals(productId)).findFirst();
     }
 
-    public void updateStock(String id, int quantity) {
-        Product product = findProductById(id);
-        if (product == null) {
-            throw new IllegalArgumentException("Product not found with ID: " + id);
-        }
-        if (product.getStockQuantity() < quantity) {
-            throw new IllegalArgumentException("Insufficient stock for product: " + product.getTitle());
-        }
-
-        product.setStockQuantity(product.getStockQuantity() - quantity);
-        repository.saveProducts(products);
+    /**
+     * Checks whether there is enough stock of a product to sell the given
+     * quantity.
+     *
+     * @param productId        identifier of the product
+     * @param requestedQuantity quantity requested for sale
+     * @return {@code true} if there is enough stock, {@code false} otherwise
+     */
+    public boolean hasSufficientStock(String productId, int requestedQuantity) {
+        return findById(productId)
+                .map(product -> product.getQuantity() >= requestedQuantity)
+                .orElse(false);
     }
 
-    void decreaseStock(String productId, int quantity) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    /**
+     * Decreases the stock of a product by the given quantity and persists
+     * the change. This method assumes the caller has already validated
+     * that there is enough stock available.
+     *
+     * @param productId identifier of the product
+     * @param quantity  quantity to subtract from the current stock
+     */
+    public void decreaseStock(String productId, int quantity) {
+        findById(productId).ifPresent(product -> {
+            product.adjustStock(-quantity);
+            persist();
+        });
     }
 
-    Object findById(String productId) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    /**
+     * Persists the current in-memory list of products to disk.
+     */
+    public void persist() {
+        productDAO.saveAll(products);
     }
-
-    boolean hasSufficientStock(String productId, int quantity) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    public void registerVideogame(String id, String title, double price, int quantity, String platform, String genre, String ageRating) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    public void registerConsole(String id, String title, double price, int quantity, String brand, String model, String generation) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    public List<Product> listProducts() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-    
-
 }

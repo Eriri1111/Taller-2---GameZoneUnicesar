@@ -4,10 +4,22 @@
  */
 package Service;
 
+import Dao.ProductRepository;
+import Model.Product;
+import java.util.List;
+
 /**
  *
  * @author Usuario
  */
 public class ProductService {
+    private final ProductRepository repository;
+    private final List <Product> products;
+    
+    public ProductService (ProductRepository repository){
+        this.repository = repository;
+        this.products = repository.loadProducts();
+    }
+    
     
 }

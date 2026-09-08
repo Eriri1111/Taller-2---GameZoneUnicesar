@@ -34,12 +34,15 @@ public class SaleService {
      * @param personService  service used to validate people and update
      *                        purchase history
      */
-    public SaleService(SaleDAO saleDAO, ProductService productService,
-                        PersonService personService) {
+    public SaleService(SaleDAO saleDAO, ProductService productService, PersonService personService) {
         this.saleDAO = saleDAO;
         this.productService = productService;
         this.personService = personService;
         this.sales = new ArrayList<>(saleDAO.loadAll());
+    }
+
+    public SaleService() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     /**

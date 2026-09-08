@@ -9,13 +9,11 @@ package Main.Dao;
  * @author Usuario
  */
 public class ProductRepository {
+
     private final String filePath;
-    
-    public ProductRepository (String filePath){
+
+    public ProductRepository(String filePath) {
         this.filePath = filePath;
     }
 
-    
-    
-    
 }

@@ -2,7 +2,7 @@ package Dao;
 
 import model.Console;
 import model.Product;
-import model.VideoGame;
+import model.Videogame;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -92,7 +92,7 @@ public class ProductRepository implements ProductDAO {
 
         try {
             if ("VIDEOGAME".equals(type)) {
-                return new VideoGame(
+                return new Videogame(
                         fields[1],
                         fields[2],
                         Double.parseDouble(fields[3]),
@@ -119,7 +119,7 @@ public class ProductRepository implements ProductDAO {
     }
 
     private String toLine(Product product) {
-        if (product instanceof VideoGame videogame) {
+        if (product instanceof Videogame videogame) {
             return String.join("|",
                     "VIDEOGAME",
                     videogame.getId(),

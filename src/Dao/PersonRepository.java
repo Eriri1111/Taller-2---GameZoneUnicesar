@@ -1,7 +1,7 @@
 package Dao;
 
-import Model.Client;
-import Model.Seller;
+import model.Client;
+import model.Seller;
 
 import java.io.BufferedReader;
 import java.io.FileReader;

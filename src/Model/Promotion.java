@@ -10,7 +10,7 @@ import java.time.LocalDate;
  *
  * @author Usuario
  */
-public class Promotion {
+public abstract class Promotion {
     private String id;
     private String name;
     private LocalDate startDate;
@@ -55,4 +55,9 @@ public class Promotion {
         this.endDate = endDate;
     }
     
+      public boolean isActive(LocalDate date) {
+        return !date.isBefore(startDate) && !date.isAfter(endDate);
+    }
+
+    public abstract double calculateDiscount(Sale sale);
 }

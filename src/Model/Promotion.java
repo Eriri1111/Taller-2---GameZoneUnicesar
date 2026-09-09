@@ -22,4 +22,21 @@ public class Promotion {
         this.startDate = startDate;
         this.endDate = endDate;
     }
+
+    public String getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public LocalDate getStartDate() {
+        return startDate;
+    }
+
+    public LocalDate getEndDate() {
+        return endDate;
+    }
+    
 }

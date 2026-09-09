@@ -1,12 +1,9 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
-package Model;
+package model;
 
 /**
- *
- * @author Usuario
+ * Represents a gaming console sold by the store. In addition to the common
+ * attributes inherited from {@link Product}, a console is characterized by
+ * its brand, model and generation.
  */
 public class Console extends Product {
 
@@ -14,41 +11,53 @@ public class Console extends Product {
     private String model;
     private String generation;
 
-    public Console(String id, String title, double price, int stockQuantity, String brand, String model, String generation) {
-        super(id, title, price, stockQuantity);
+    /**
+     * Creates a new console.
+     *
+     * @param id         unique identifier of the product
+     * @param title      title (commercial name) of the console
+     * @param price      unit price
+     * @param quantity   quantity available in inventory
+     * @param brand      manufacturer brand (e.g. Sony, Microsoft, Nintendo)
+     * @param model      specific model of the console
+     * @param generation hardware generation (e.g. 9th generation)
+     */
+    public Console(String id, String title, double price, int quantity,
+                    String brand, String model, String generation) {
+        super(id, title, price, quantity);
         this.brand = brand;
         this.model = model;
         this.generation = generation;
-    }
-
-    @Override
-    public String getDescription() {
-        return String.format("Console [ID: %s] %s | Brand: %s | Model: %s | Gen: %s | Price: $%.2f | Stock: %d",
-                getId(), getTitle(), brand, model, generation, getPrice(), getStockQuantity());
     }
 
     public String getBrand() {
         return brand;
     }
 
-    public String getModel() {
-        return model;
-    }
-
-    public String getGeneration() {
-        return generation;
-    }
-
     public void setBrand(String brand) {
         this.brand = brand;
+    }
+
+    public String getModel() {
+        return model;
     }
 
     public void setModel(String model) {
         this.model = model;
     }
 
+    public String getGeneration() {
+        return generation;
+    }
+
     public void setGeneration(String generation) {
         this.generation = generation;
     }
 
+    @Override
+    public String getDescription() {
+        return String.format(
+                "Console: %s | Brand: %s | Model: %s | Generation: %s | Price: %.2f | Stock: %d",
+                getTitle(), brand, model, generation, getPrice(), getQuantity());
+    }
 }

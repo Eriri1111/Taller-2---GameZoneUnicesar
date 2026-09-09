@@ -1,4 +1,4 @@
-package model;
+package Model;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -18,7 +18,7 @@ public class Sale {
     private LocalDate date;
     private String clientId;
     private String sellerId;
-    private List<SaleItem> items;
+    private final List<SaleItem> items;
 
     /**
      * Creates a new sale with no items. Items must be added afterwards

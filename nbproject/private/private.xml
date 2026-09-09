@@ -3,23 +3,16 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/ESTUDIANTES/Documents/NetBeansProjects/Taller-2---GameZoneUnicesar/src/Model/Console.java</file>
-            <file>file:/C:/Users/ESTUDIANTES/Documents/NetBeansProjects/Taller-2---GameZoneUnicesar/src/Model/Product.java</file>
-            <file>file:/C:/Users/ESTUDIANTES/Documents/NetBeansProjects/Taller-2---GameZoneUnicesar/src/Service/SaleService.java</file>
-            <file>file:/C:/Users/ESTUDIANTES/Documents/NetBeansProjects/Taller-2---GameZoneUnicesar/src/Service/PersonService.java</file>
-            <file>file:/C:/Users/ESTUDIANTES/Documents/NetBeansProjects/Taller-2---GameZoneUnicesar/src/Service/ProductService.java</file>
-            <file>file:/C:/Users/ESTUDIANTES/Documents/NetBeansProjects/Taller-2---GameZoneUnicesar/src/Model/ConsoleUI.java</file>
-            <file>file:/C:/Users/ESTUDIANTES/Documents/NetBeansProjects/Taller-2---GameZoneUnicesar/src/Model/Seller.java</file>
-            <file>file:/C:/Users/ESTUDIANTES/Documents/NetBeansProjects/Taller-2---GameZoneUnicesar/test/Model/SellerTest.java</file>
-            <file>file:/C:/Users/ESTUDIANTES/Documents/NetBeansProjects/Taller-2---GameZoneUnicesar/src/Model/Person.java</file>
-            <file>file:/C:/Users/ESTUDIANTES/Documents/NetBeansProjects/Taller-2---GameZoneUnicesar/src/Model/Client.java</file>
-            <file>file:/C:/Users/ESTUDIANTES/Documents/NetBeansProjects/Taller-2---GameZoneUnicesar/src/Dao/PersonDAO.java</file>
-            <file>file:/C:/Users/ESTUDIANTES/Documents/NetBeansProjects/Taller-2---GameZoneUnicesar/src/Dao/ProductRepository.java</file>
-            <file>file:/C:/Users/ESTUDIANTES/Documents/NetBeansProjects/Taller-2---GameZoneUnicesar/src/Ui/ConsoleUI.java</file>
-            <file>file:/C:/Users/ESTUDIANTES/Documents/NetBeansProjects/Taller-2---GameZoneUnicesar/src/Dao/SellerDAO.java</file>
-            <file>file:/C:/Users/ESTUDIANTES/Documents/NetBeansProjects/Taller-2---GameZoneUnicesar/src/Dao/SaleRepository.java</file>
-            <file>file:/C:/Users/ESTUDIANTES/Documents/NetBeansProjects/Taller-2---GameZoneUnicesar/src/Model/SaleItem.java</file>
-            <file>file:/C:/Users/ESTUDIANTES/Documents/NetBeansProjects/Taller-2---GameZoneUnicesar/src/Dao/ProductDAO.java</file>
+            <file>file:/C:/Users/Usuario/Documents/NetBeansProjects/Taller-2---GameZoneUnicesar/src/Model/VideoGame.java</file>
+            <file>file:/C:/Users/Usuario/Documents/NetBeansProjects/Taller-2---GameZoneUnicesar/src/Model/Console.java</file>
+            <file>file:/C:/Users/Usuario/Documents/NetBeansProjects/Taller-2---GameZoneUnicesar/src/Dao/ProductRepository.java</file>
+            <file>file:/C:/Users/Usuario/Documents/NetBeansProjects/Taller-2---GameZoneUnicesar/src/Service/ProductService.java</file>
+            <file>file:/C:/Users/Usuario/Documents/NetBeansProjects/Taller-2---GameZoneUnicesar/src/Model/Promotion.java</file>
+            <file>file:/C:/Users/Usuario/Documents/NetBeansProjects/Taller-2---GameZoneUnicesar/src/Model/Sale.java</file>
+            <file>file:/C:/Users/Usuario/Documents/NetBeansProjects/Taller-2---GameZoneUnicesar/src/Model/Seller.java</file>
+            <file>file:/C:/Users/Usuario/Documents/NetBeansProjects/Taller-2---GameZoneUnicesar/src/Model/Person.java</file>
+            <file>file:/C:/Users/Usuario/Documents/NetBeansProjects/Taller-2---GameZoneUnicesar/src/Model/Product.java</file>
+            <file>file:/C:/Users/Usuario/Documents/NetBeansProjects/Taller-2---GameZoneUnicesar/src/Model/Client.java</file>
         </group>
     </open-files>
 </project-private>

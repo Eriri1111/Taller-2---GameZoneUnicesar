@@ -1,8 +1,8 @@
 package service;
 
-import model.Console;
-import model.Product;
-import model.Videogame;
+import Model.Console;
+import Model.Product;
+import Model.VideoGame;
 import Dao.ProductDAO;
 
 import java.util.ArrayList;
@@ -43,9 +43,9 @@ public class ProductService {
      * @param ageRating recommended age rating
      * @return the newly created videogame
      */
-    public Videogame registerVideogame(String id, String title, double price, int quantity,
+    public VideoGame registerVideogame(String id, String title, double price, int quantity,
                                         String platform, String genre, String ageRating) {
-        Videogame videogame = new Videogame(id, title, price, quantity, platform, genre, ageRating);
+        VideoGame videogame = new VideoGame(id, title, price, quantity, platform, genre, ageRating);
         products.add(videogame);
         persist();
         return videogame;

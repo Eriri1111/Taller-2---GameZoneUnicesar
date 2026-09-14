@@ -2,16 +2,20 @@ package ui;
 
 import model.Client;
 import model.Product;
+import model.Promotion;
 import model.Sale;
 import model.SaleItem;
 import model.Seller;
 import service.PersonService;
 import service.ProductService;
+import service.PromotionService;
 import service.SaleService;
 
+import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.Scanner;
 import java.util.UUID;
 
@@ -26,19 +30,23 @@ public class ConsoleUI {
     private final ProductService productService;
     private final PersonService personService;
     private final SaleService saleService;
+    private final PromotionService promotionService;
     private final Scanner scanner;
 
     /**
-     * Creates the console UI wired to the three application services.
+     * Creates the console UI wired to the four application services.
      *
-     * @param productService service used for product operations
-     * @param personService  service used for client and seller operations
-     * @param saleService    service used for sale operations
+     * @param productService   service used for product operations
+     * @param personService    service used for client and seller operations
+     * @param saleService      service used for sale operations
+     * @param promotionService service used for promotion operations
      */
-    public ConsoleUI(ProductService productService, PersonService personService, SaleService saleService) {
+    public ConsoleUI(ProductService productService, PersonService personService,
+                      SaleService saleService, PromotionService promotionService) {
         this.productService = productService;
         this.personService = personService;
         this.saleService = saleService;
+        this.promotionService = promotionService;
         this.scanner = new Scanner(System.in);
     }
 
@@ -65,6 +73,8 @@ public class ConsoleUI {
                 case "8" -> listAllSales();
                 case "9" -> listSalesByClient();
                 case "10" -> listSalesBySeller();
+                case "11" -> viewSaleReceipt();
+                case "12" -> promotionsMenu();
                 case "0" -> {
                     running = false;
                     System.out.println("Goodbye!");
@@ -87,6 +97,8 @@ public class ConsoleUI {
         System.out.println("8. View full sales history");
         System.out.println("9. View purchase history of a client");
         System.out.println("10. View sales attended by a seller");
+        System.out.println("11. View a sale receipt (subtotal, discount and total)");
+        System.out.println("12. Manage promotions");
         System.out.println("0. Exit");
         System.out.print("Select an option: ");
     }
@@ -207,10 +219,22 @@ public class ConsoleUI {
             String saleId = generateId();
             Sale sale = saleService.registerSale(saleId, clientId, sellerId, items);
             System.out.println("Sale registered with id: " + sale.getId());
-            System.out.printf("Total: %.2f%n", sale.calculateTotal());
+            System.out.println(sale.generateReceipt());
         } catch (IllegalArgumentException e) {
             System.out.println("Could not register sale: " + e.getMessage());
         }
+    }
+
+    private void viewSaleReceipt() {
+        System.out.print("Sale id: ");
+        String saleId = scanner.nextLine().trim();
+
+        Optional<Sale> sale = saleService.findById(saleId);
+        if (sale.isEmpty()) {
+            System.out.println("Sale not found: " + saleId);
+            return;
+        }
+        System.out.println(sale.get().generateReceipt());
     }
 
     private void listAllSales() {
@@ -245,6 +269,121 @@ public class ConsoleUI {
                         item.getProductTitle(), item.getQuantity(), item.getSubtotal());
             }
             System.out.printf("  Total: %.2f%n", sale.calculateTotal());
+        }
+    }
+
+    /**
+     * Submenu for managing promotions. Its messages are shown in Spanish,
+     * per the specific requirement of the promotions module, even though
+     * the rest of this console menu remains in English to stay consistent
+     * with the pre-existing system.
+     */
+    private void promotionsMenu() {
+        boolean inSubmenu = true;
+
+        while (inSubmenu) {
+            System.out.println();
+            System.out.println("---- GESTIÓN DE PROMOCIONES ----");
+            System.out.println("1. Registrar promoción por porcentaje");
+            System.out.println("2. Registrar promoción por categoría");
+            System.out.println("3. Registrar promoción por volumen de compra");
+            System.out.println("4. Listar todas las promociones");
+            System.out.println("5. Listar promociones vigentes");
+            System.out.println("0. Volver al menú principal");
+            System.out.print("Seleccione una opción: ");
+
+            String option = scanner.nextLine().trim();
+            switch (option) {
+                case "1" -> registerPercentagePromotion();
+                case "2" -> registerCategoryPromotion();
+                case "3" -> registerBulkPromotion();
+                case "4" -> listAllPromotions();
+                case "5" -> listActivePromotions();
+                case "0" -> inSubmenu = false;
+                default -> System.out.println("Opción inválida, intente de nuevo.");
+            }
+        }
+    }
+
+    private void registerPercentagePromotion() {
+        System.out.println("--- Registrar promoción por porcentaje ---");
+        System.out.print("Nombre de la promoción: ");
+        String name = scanner.nextLine();
+        System.out.print("Porcentaje de descuento (0-100): ");
+        double percentage = readDouble();
+        LocalDate startDate = readDate("Fecha de inicio (aaaa-mm-dd): ");
+        LocalDate endDate = readDate("Fecha de fin (aaaa-mm-dd): ");
+
+        String id = generateId();
+        promotionService.registerPercentageDiscount(id, name, startDate, endDate, percentage);
+        System.out.println("Promoción registrada con id: " + id);
+    }
+
+    private void registerCategoryPromotion() {
+        System.out.println("--- Registrar promoción por categoría ---");
+        System.out.print("Nombre de la promoción: ");
+        String name = scanner.nextLine();
+        System.out.print("Porcentaje de descuento (0-100): ");
+        double percentage = readDouble();
+        System.out.print("Categoría objetivo (VIDEOGAME o CONSOLE): ");
+        String targetCategory = scanner.nextLine().trim().toUpperCase();
+        LocalDate startDate = readDate("Fecha de inicio (aaaa-mm-dd): ");
+        LocalDate endDate = readDate("Fecha de fin (aaaa-mm-dd): ");
+
+        String id = generateId();
+        promotionService.registerCategoryDiscount(id, name, startDate, endDate, percentage, targetCategory);
+        System.out.println("Promoción registrada con id: " + id);
+    }
+
+    private void registerBulkPromotion() {
+        System.out.println("--- Registrar promoción por volumen de compra ---");
+        System.out.print("Nombre de la promoción: ");
+        String name = scanner.nextLine();
+        System.out.print("Cantidad mínima de productos: ");
+        int minimumQuantity = readInt();
+        System.out.print("Porcentaje de descuento (0-100): ");
+        double percentage = readDouble();
+        LocalDate startDate = readDate("Fecha de inicio (aaaa-mm-dd): ");
+        LocalDate endDate = readDate("Fecha de fin (aaaa-mm-dd): ");
+
+        String id = generateId();
+        promotionService.registerBulkPurchaseDiscount(id, name, startDate, endDate, minimumQuantity, percentage);
+        System.out.println("Promoción registrada con id: " + id);
+    }
+
+    private void listAllPromotions() {
+        System.out.println("--- Todas las promociones registradas ---");
+        List<Promotion> promotions = promotionService.listAllPromotions();
+        if (promotions.isEmpty()) {
+            System.out.println("No hay promociones registradas todavía.");
+            return;
+        }
+        for (Promotion promotion : promotions) {
+            System.out.println("[" + promotion.getId() + "] " + promotion.getName()
+                    + " (vigente del " + promotion.getStartDate() + " al " + promotion.getEndDate() + ")");
+        }
+    }
+
+    private void listActivePromotions() {
+        System.out.println("--- Promociones vigentes hoy ---");
+        List<Promotion> promotions = promotionService.listActivePromotions();
+        if (promotions.isEmpty()) {
+            System.out.println("No hay promociones vigentes en este momento.");
+            return;
+        }
+        for (Promotion promotion : promotions) {
+            System.out.println("[" + promotion.getId() + "] " + promotion.getName());
+        }
+    }
+
+    private LocalDate readDate(String prompt) {
+        while (true) {
+            System.out.print(prompt);
+            try {
+                return LocalDate.parse(scanner.nextLine().trim());
+            } catch (RuntimeException e) {
+                System.out.println("Fecha inválida. Use el formato aaaa-mm-dd.");
+            }
         }
     }
 

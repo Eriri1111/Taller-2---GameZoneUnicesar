@@ -1,4 +1,4 @@
-package model;
+package Model;
 
 /**
  * Represents a videogame sold by the store. In addition to the common
@@ -6,7 +6,7 @@ package model;
  * by the platform it was developed for, its genre and its recommended
  * age rating.
  */
-public class Videogame extends Product {
+public class VideoGame extends Product {
 
     private String platform;
     private String genre;
@@ -23,7 +23,7 @@ public class Videogame extends Product {
      * @param genre     genre of the videogame (e.g. RPG, action, sports)
      * @param ageRating recommended age rating (e.g. E, T, M)
      */
-    public Videogame(String id, String title, double price, int quantity,
+    public VideoGame(String id, String title, double price, int quantity,
                       String platform, String genre, String ageRating) {
         super(id, title, price, quantity);
         this.platform = platform;

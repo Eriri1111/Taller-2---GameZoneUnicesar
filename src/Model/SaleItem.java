@@ -1,4 +1,4 @@
-package model;
+package Model;
 
 /**
  * Represents a single product line within a {@link Sale}: a snapshot of the

@@ -1,4 +1,4 @@
-package model;
+package Model;
 
 /**
  * Abstract base class that represents any product sold by the store.

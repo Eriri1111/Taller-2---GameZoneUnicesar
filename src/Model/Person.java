@@ -1,4 +1,4 @@
-package model;
+package Model;
 
 /**
  * Abstract base class that represents any person interacting with the store.

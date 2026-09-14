@@ -2,9 +2,11 @@ package Main;
 
 import Dao.PersonRepository;
 import Dao.ProductRepository;
+import Dao.PromotionRepository;
 import Dao.SaleRepository;
 import service.PersonService;
 import service.ProductService;
+import service.PromotionService;
 import service.SaleService;
 import ui.ConsoleUI;
 
@@ -29,12 +31,14 @@ public class Main {
                 DATA_FOLDER + "/clients.txt",
                 DATA_FOLDER + "/sellers.txt");
         SaleRepository saleRepository = new SaleRepository(DATA_FOLDER + "/sales.txt");
+        PromotionRepository promotionRepository = new PromotionRepository(DATA_FOLDER + "/promotions.csv");
 
         ProductService productService = new ProductService(productRepository);
         PersonService personService = new PersonService(personRepository);
-        SaleService saleService = new SaleService(saleRepository, productService, personService);
+        PromotionService promotionService = new PromotionService(promotionRepository);
+        SaleService saleService = new SaleService(saleRepository, productService, personService, promotionService);
 
-        ConsoleUI consoleUI = new ConsoleUI(productService, personService, saleService);
+        ConsoleUI consoleUI = new ConsoleUI(productService, personService, saleService, promotionService);
         consoleUI.start();
     }
 }

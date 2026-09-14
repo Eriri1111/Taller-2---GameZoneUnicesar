@@ -1,7 +1,7 @@
 package service;
 
-import model.Client;
-import model.Seller;
+import Model.Client;
+import Model.Seller;
 import Dao.PersonDAO;
 
 import java.util.ArrayList;

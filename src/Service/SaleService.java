@@ -1,8 +1,8 @@
 package service;
 
-import model.Product;
-import model.Sale;
-import model.SaleItem;
+import Model.Product;
+import Model.Sale;
+import Model.SaleItem;
 import Dao.SaleDAO;
 
 import java.time.LocalDate;

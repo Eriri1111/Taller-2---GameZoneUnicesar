@@ -1,8 +1,8 @@
 package service;
 
-import Model.Console;
-import Model.Product;
-import Model.VideoGame;
+import model.Console;
+import model.Product;
+import model.VideoGame;
 import Dao.ProductDAO;
 
 import java.util.ArrayList;

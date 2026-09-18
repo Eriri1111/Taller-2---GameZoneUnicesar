@@ -1,8 +1,10 @@
 package service;
 
-import Model.Product;
-import Model.Sale;
-import Model.SaleItem;
+import model.Product;
+import model.Promotion;
+import model.Sale;
+import model.SaleItem;
+import model.VideoGame;
 import Dao.SaleDAO;
 
 import java.time.LocalDate;
@@ -24,21 +26,25 @@ public class SaleService {
     private final SaleDAO saleDAO;
     private final ProductService productService;
     private final PersonService personService;
+    private final PromotionService promotionService;
     private final List<Sale> sales;
 
     /**
      * Creates the service and loads the current sales data from disk.
      *
-     * @param saleDAO        DAO used to persist sales
-     * @param productService service used to validate and update stock
-     * @param personService  service used to validate people and update
-     *                        purchase history
+     * @param saleDAO          DAO used to persist sales
+     * @param productService   service used to validate and update stock
+     * @param personService    service used to validate people and update
+     *                         purchase history
+     * @param promotionService service used to select the best applicable
+     *                         promotion for each new sale
      */
     public SaleService(SaleDAO saleDAO, ProductService productService,
-                        PersonService personService) {
+                        PersonService personService, PromotionService promotionService) {
         this.saleDAO = saleDAO;
         this.productService = productService;
         this.personService = personService;
+        this.promotionService = promotionService;
         this.sales = new ArrayList<>(saleDAO.loadAll());
     }
 
@@ -92,16 +98,47 @@ public class SaleService {
             String productId = entry.getKey();
             int quantity = entry.getValue();
             Product product = productService.findById(productId).orElseThrow();
+            String category = (product instanceof VideoGame) ? "VIDEOGAME" : "CONSOLE";
 
-            sale.addItem(new SaleItem(product.getId(), product.getTitle(), product.getPrice(), quantity));
+            sale.addItem(new SaleItem(product.getId(), product.getTitle(), product.getPrice(), quantity, category));
             productService.decreaseStock(productId, quantity);
         }
+
+        applyBestPromotion(sale);
 
         sales.add(sale);
         persist();
         personService.addPurchaseToClient(clientId, saleId);
 
         return sale;
+    }
+
+    /**
+     * Consults the promotion module for the best promotion currently
+     * applicable to the given sale and, if one is found, records its name
+     * and discount amount on the sale. Promotions are not accumulable:
+     * at most one is applied per sale. If no promotion applies, the sale
+     * is left without a discount and its total is calculated normally.
+     *
+     * @param sale the sale to evaluate and, if applicable, discount
+     */
+    private void applyBestPromotion(Sale sale) {
+        Promotion bestPromotion = promotionService.findBestPromotionFor(sale);
+        if (bestPromotion != null) {
+            double discount = bestPromotion.calculateDiscount(sale);
+            sale.setAppliedPromotionName(bestPromotion.getName());
+            sale.setDiscountAmount(discount);
+        }
+    }
+
+    /**
+     * Finds a sale by its identifier.
+     *
+     * @param saleId identifier of the sale to search for
+     * @return an {@link Optional} containing the sale if found
+     */
+    public Optional<Sale> findById(String saleId) {
+        return sales.stream().filter(sale -> sale.getId().equals(saleId)).findFirst();
     }
 
     /**

@@ -13,6 +13,11 @@
             <file>file:/C:/Users/Usuario/Documents/NetBeansProjects/Taller-2---GameZoneUnicesar/src/Model/Person.java</file>
             <file>file:/C:/Users/Usuario/Documents/NetBeansProjects/Taller-2---GameZoneUnicesar/src/Model/Product.java</file>
             <file>file:/C:/Users/Usuario/Documents/NetBeansProjects/Taller-2---GameZoneUnicesar/src/Model/Client.java</file>
+            <file>file:/C:/Users/Usuario/Documents/NetBeansProjects/Taller-2---GameZoneUnicesar/src/Model/SaleItem.java</file>
+            <file>file:/C:/Users/Usuario/Documents/NetBeansProjects/Taller-2---GameZoneUnicesar/src/Service/PersonService.java</file>
+            <file>file:/C:/Users/Usuario/Documents/NetBeansProjects/Taller-2---GameZoneUnicesar/src/Service/SaleService.java</file>
+            <file>file:/C:/Users/Usuario/Documents/NetBeansProjects/Taller-2---GameZoneUnicesar/src/Dao/ClientDAO.java</file>
+            <file>file:/C:/Users/Usuario/Documents/NetBeansProjects/Taller-2---GameZoneUnicesar/src/Dao/PersonRepository.java</file>
         </group>
     </open-files>
 </project-private>
